@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButtonModule],
+  imports: [RouterLink, RouterLinkActive],
   template: `
     <header class="topbar">
       <a routerLink="/" class="brand">
@@ -17,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
       </a>
 
       <nav class="topnav">
-        <a routerLink="/" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
         <a routerLink="/upload" routerLinkActive="active">Upload Resume</a>
       </nav>
     </header>

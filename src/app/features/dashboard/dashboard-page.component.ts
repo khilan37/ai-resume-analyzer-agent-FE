@@ -19,15 +19,15 @@ import { HeroComponent } from '../../shared/components/hero/hero.component';
       <app-hero
         eyebrow="AI Resume Intelligence"
         title="See resume strengths, gaps, and role fit in one view."
-        subtitle="Upload a PDF or DOCX, send it through Gemini with Semantic Kernel, and store structured analysis in PostgreSQL JSONB.">
+        subtitle="Upload a PDF or DOCX, send it through Gemini, and visualize structured analysis from the .NET backend.">
         <div class="hero-metrics">
           <div>
             <strong>Skill extraction</strong>
-            <span>AI-generated tag mapping for technical, domain, and tooling skills.</span>
+            <span>Technical and domain skills mapped from each uploaded resume.</span>
           </div>
           <div>
             <strong>Role gap analysis</strong>
-            <span>Targeted missing-skill insight for the job role you care about.</span>
+            <span>Missing skills and targeted suggestions for the selected role.</span>
           </div>
           <a mat-flat-button routerLink="/upload">Analyze New Resume</a>
         </div>
@@ -36,7 +36,7 @@ import { HeroComponent } from '../../shared/components/hero/hero.component';
       <section class="section-head">
         <div>
           <h2>Recent Analyses</h2>
-          <p>Resume history stored from the backend `ResumeAnalysis` table.</p>
+          <p>Resume history from the backend analysis store.</p>
         </div>
       </section>
 

@@ -1,6 +1,5 @@
-import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +12,7 @@ import { LoadingOverlayComponent } from '../../shared/components/loading-overlay
 @Component({
   selector: 'app-upload-page',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, LoadingOverlayComponent],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, LoadingOverlayComponent],
   template: `
     <app-loading-overlay [visible]="isSubmitting"></app-loading-overlay>
 
@@ -26,13 +25,13 @@ import { LoadingOverlayComponent } from '../../shared/components/loading-overlay
         </div>
 
         <form [formGroup]="form" (ngSubmit)="submit()" class="upload-form">
-          <button type="button" class="dropzone" (click)="fileInput.click()" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
+          <button type="button" class="dropzone" (click)="filePicker.click()" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
             <mat-icon>upload_file</mat-icon>
             <strong>{{ selectedFile?.name || 'Drag and drop resume here' }}</strong>
             <span>{{ selectedFile ? 'Click to replace file' : 'or click to browse from your device' }}</span>
           </button>
 
-          <input #fileInput type="file" hidden accept=".pdf,.docx" (change)="onFileSelected($event)">
+          <input #filePicker type="file" hidden accept=".pdf,.docx" (change)="onFileSelected($event)">
 
           <mat-form-field appearance="outline">
             <mat-label>Target Job Role</mat-label>
@@ -62,6 +61,8 @@ import { LoadingOverlayComponent } from '../../shared/components/loading-overlay
   `]
 })
 export class UploadPageComponent {
+  @ViewChild('fileInput', { static: true }) fileInput!: ElementRef<HTMLInputElement>;
+
   private readonly formBuilder = inject(FormBuilder);
   private readonly resumeApiService = inject(ResumeApiService);
   private readonly router = inject(Router);
@@ -93,6 +94,7 @@ export class UploadPageComponent {
   clear(): void {
     this.selectedFile = null;
     this.form.reset();
+    this.fileInput.nativeElement.value = '';
   }
 
   submit(): void {
@@ -103,8 +105,9 @@ export class UploadPageComponent {
     this.isSubmitting = true;
     const jobRole = this.form.controls.jobRole.value ?? '';
 
-    this.resumeApiService.uploadResume(this.selectedFile, jobRole)
-      .pipe(finalize(() => this.isSubmitting = false))
+    this.resumeApiService
+      .uploadResume(this.selectedFile, jobRole)
+      .pipe(finalize(() => (this.isSubmitting = false)))
       .subscribe({
         next: (response) => this.router.navigate(['/analysis', response.resumeId]),
         error: (error) => console.error('Upload failed', error)
