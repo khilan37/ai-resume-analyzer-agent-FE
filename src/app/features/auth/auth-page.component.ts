@@ -20,6 +20,16 @@ import { AuthService } from '../../core/services/auth.service';
           <span class="eyebrow">Secure Access</span>
           <h1>Sign in before uploading or viewing resume analysis.</h1>
           <p>The backend protects resume APIs with JWT, so the UI needs login and registration to obtain a token first.</p>
+          <div class="trust-points">
+            <div>
+              <strong>Protected workflows</strong>
+              <span>Keep upload history, analysis retrieval, and future resume sessions behind authenticated access.</span>
+            </div>
+            <div>
+              <strong>Fast handoff</strong>
+              <span>Create an account once, then move straight into resume intake and analysis screens.</span>
+            </div>
+          </div>
         </div>
 
         <mat-card class="auth-card">
@@ -55,19 +65,27 @@ import { AuthService } from '../../core/services/auth.service';
     </main>
   `,
   styles: [`
-    .page{max-width:1100px;margin:0 auto;padding:2rem}
-    .auth-shell{display:grid;grid-template-columns:1fr 460px;gap:1.5rem;align-items:start}
-    .auth-copy{padding:2rem;border-radius:32px;background:linear-gradient(160deg,rgba(183,228,199,.65),rgba(255,255,255,.9));box-shadow:0 25px 60px rgba(8,32,50,.08)}
-    .eyebrow{display:inline-block;color:#1f8a70;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
-    h1{margin:.75rem 0 1rem;font-size:clamp(2rem,4vw,3.75rem);line-height:1;font-family:var(--font-display)}
-    p{margin:0;color:var(--muted)}
-    .auth-card{border-radius:28px;padding:1.25rem}
-    .tabs{display:flex;gap:.5rem;margin-bottom:1rem}
-    .tabs button{flex:1;padding:.85rem 1rem;border:0;border-radius:999px;background:#edf5f0;color:var(--muted);cursor:pointer}
-    .tabs button.active{background:#1f8a70;color:#fff}
+    .page{max-width:1160px;margin:0 auto;padding:1.5rem 2rem 4rem}
+    .auth-shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,460px);gap:1.5rem;align-items:start}
+    .auth-copy{padding:2.2rem;border-radius:36px;background:linear-gradient(160deg,rgba(255,255,255,.84),rgba(207,230,215,.72));box-shadow:var(--shadow-lg);border:1px solid rgba(16,35,28,.08)}
+    .eyebrow{display:inline-block;color:var(--primary);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}
+    h1{margin:.75rem 0 1rem;font-size:clamp(2.2rem,4vw,4rem);line-height:.95;font-family:var(--font-display)}
+    p{margin:0;color:var(--muted);line-height:1.65}
+    .trust-points{display:grid;gap:.95rem;margin-top:1.4rem}
+    .trust-points div{padding:1rem 1.1rem;border-radius:22px;background:rgba(255,255,255,.56);border:1px solid rgba(16,35,28,.08)}
+    .trust-points strong,.trust-points span{display:block}
+    .trust-points span{margin-top:.35rem}
+    .auth-card{border-radius:32px;padding:1.25rem;border:1px solid rgba(16,35,28,.08)}
+    .tabs{display:flex;gap:.5rem;margin-bottom:1rem;padding:.3rem;border-radius:999px;background:rgba(29,107,87,.06)}
+    .tabs button{flex:1;padding:.9rem 1rem;border:0;border-radius:999px;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s ease,color .2s ease}
+    .tabs button.active{background:var(--primary);color:#fff}
     .auth-form{display:grid;gap:1rem}
-    .error{color:#b42318;font-size:.92rem}
-    @media (max-width:900px){.auth-shell{grid-template-columns:1fr}.page{padding:1rem}}
+    .auth-form button[type='submit']{margin-top:.25rem}
+    .error{color:var(--danger);font-size:.92rem}
+    @media (max-width:900px){
+      .auth-shell{grid-template-columns:1fr}
+      .page{padding:1rem 1rem 3rem}
+    }
   `]
 })
 export class AuthPageComponent {

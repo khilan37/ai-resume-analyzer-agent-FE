@@ -24,13 +24,26 @@ import { LoadingOverlayComponent } from '../../shared/components/loading-overlay
           <span class="eyebrow">Resume Intake</span>
           <h1>Upload a resume and get a structured AI review.</h1>
           <p>Accepted formats: PDF and DOCX. Add an optional target role for missing-skill detection and role matching.</p>
+          <div class="upload-highlights">
+            <div>
+              <strong>Instant structure</strong>
+              <span>Resume summary, score, missing skills, and role-fit insights in one flow.</span>
+            </div>
+            <div>
+              <strong>Role-aware feedback</strong>
+              <span>Add a target role to get clearer recommendations and skill-gap direction.</span>
+            </div>
+          </div>
         </div>
 
         <form [formGroup]="form" (ngSubmit)="submit()" class="upload-form">
           <button type="button" class="dropzone" (click)="filePicker.click()" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
-            <mat-icon>upload_file</mat-icon>
+            <div class="dropzone-icon">
+              <mat-icon>upload_file</mat-icon>
+            </div>
             <strong>{{ selectedFile?.name || 'Drag and drop resume here' }}</strong>
             <span>{{ selectedFile ? 'Click to replace file' : 'or click to browse from your device' }}</span>
+            <small>Supported file types: PDF, DOCX</small>
           </button>
 
           <input #filePicker type="file" hidden accept=".pdf,.docx" (change)="onFileSelected($event)">
@@ -55,19 +68,39 @@ import { LoadingOverlayComponent } from '../../shared/components/loading-overlay
     </main>
   `,
   styles: [`
-    .page{max-width:980px;margin:0 auto;padding:1rem 2rem 4rem}
-    .upload-panel{display:grid;gap:1.5rem;padding:2rem;border-radius:36px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(240,248,245,.98));box-shadow:0 25px 80px rgba(8,32,50,.09)}
-    .panel-copy h1{margin:.6rem 0;font-size:clamp(2rem,4vw,3.6rem);line-height:1;font-family:var(--font-display)}
+    .page{max-width:1080px;margin:0 auto;padding:1rem 2rem 4rem}
+    .upload-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.92fr);gap:1.5rem;padding:2rem;border-radius:38px;background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(248,251,246,.96));backdrop-filter:blur(18px);box-shadow:var(--shadow-lg);border:1px solid rgba(16,35,28,.08)}
+    .panel-copy{padding:1rem}
+    .panel-copy h1{margin:.7rem 0 1rem;font-size:clamp(2.2rem,4vw,4rem);line-height:.95;font-family:var(--font-display)}
     .panel-copy p,.eyebrow{color:var(--muted)}
+    .panel-copy p{line-height:1.65}
     .eyebrow{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}
-    .upload-form{display:grid;gap:1.25rem}
-    .dropzone{display:grid;place-items:center;gap:.6rem;padding:2.5rem;border-radius:28px;border:2px dashed rgba(31,138,112,.35);background:linear-gradient(135deg,rgba(183,228,199,.35),rgba(255,255,255,.7));cursor:pointer;transition:.2s ease}
-    .dropzone:hover{transform:translateY(-2px);border-color:#1f8a70}
-    .dropzone mat-icon{transform:scale(1.4)}
-    .guest-note{margin:0;color:var(--muted);font-size:.92rem}
-    .error{margin:0;color:#b42318;font-size:.92rem}
-    .actions{display:flex;justify-content:flex-end;gap:1rem}
-    @media (max-width:760px){.page{padding:1rem 1rem 3rem}.upload-panel{padding:1.25rem}.actions{justify-content:stretch;flex-direction:column}}
+    .upload-highlights{display:grid;gap:.9rem;margin-top:1.35rem}
+    .upload-highlights div{padding:1rem 1.1rem;border-radius:22px;background:rgba(29,107,87,.05);border:1px solid rgba(29,107,87,.08)}
+    .upload-highlights strong,.upload-highlights span{display:block}
+    .upload-highlights span{margin-top:.35rem;line-height:1.55}
+    .upload-form{display:grid;align-content:start;gap:1.1rem;padding:1.25rem;border-radius:30px;background:rgba(255,255,255,.76);border:1px solid rgba(16,35,28,.08)}
+    .dropzone{display:grid;place-items:center;gap:.65rem;padding:2.25rem 1.25rem;border-radius:28px;border:2px dashed rgba(29,107,87,.28);background:linear-gradient(135deg,rgba(207,230,215,.55),rgba(255,255,255,.92));cursor:pointer;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;text-align:center}
+    .dropzone:hover{transform:translateY(-2px);border-color:var(--primary);box-shadow:0 18px 36px rgba(29,107,87,.12)}
+    .dropzone strong{font-size:1.1rem;line-height:1.3}
+    .dropzone span{color:var(--muted);line-height:1.5}
+    .dropzone small{color:var(--muted);font-size:.85rem}
+    .dropzone-icon{display:grid;place-items:center;width:72px;height:72px;border-radius:22px;background:linear-gradient(145deg,#fff6e8,#d8ecdf 45%,#7ebea3);color:var(--primary-strong);box-shadow:inset 0 1px 10px rgba(255,255,255,.5)}
+    .dropzone mat-icon{transform:scale(1.55)}
+    .guest-note{margin:0;color:var(--muted);font-size:.92rem;line-height:1.5}
+    .error{margin:0;color:var(--danger);font-size:.92rem;line-height:1.5}
+    .actions{display:flex;justify-content:flex-end;gap:.85rem;flex-wrap:wrap}
+    .actions button{min-width:140px}
+    @media (max-width:900px){
+      .upload-panel{grid-template-columns:1fr}
+    }
+    @media (max-width:760px){
+      .page{padding:1rem 1rem 3rem}
+      .upload-panel{padding:1.1rem;border-radius:28px}
+      .panel-copy,.upload-form{padding:1rem}
+      .actions{justify-content:stretch;flex-direction:column}
+      .actions button{width:100%}
+    }
   `]
 })
 export class UploadPageComponent {

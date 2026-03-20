@@ -26,17 +26,26 @@ import { AuthService } from '../../../core/services/auth.service';
     </header>
   `,
   styles: [`
-    .topbar{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;max-width:1200px;margin:0 auto}
-    .brand{display:flex;gap:1rem;align-items:center;color:inherit;text-decoration:none}
-    .brand-mark{display:grid;place-items:center;flex:0 0 auto;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#e7fff4 0%,#a3e7cb 42%,#5fc4a1 70%,#2e8f74 100%);box-shadow:0 12px 28px rgba(31,138,112,.2), inset 0 2px 10px rgba(255,255,255,.45);font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:1.65rem;line-height:1;color:#174b46;letter-spacing:-.08em;text-align:center;padding-bottom:2px}
+    .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 2rem;max-width:1240px;margin:0 auto}
+    .topbar::before{content:'';position:absolute;inset:.4rem 1rem;border:1px solid rgba(16,35,28,.08);border-radius:28px;background:rgba(255,255,255,.62);backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(16,35,28,.08);z-index:-1}
+    .brand{display:flex;gap:1rem;align-items:center;color:inherit;text-decoration:none;min-width:0}
+    .brand-mark{display:grid;place-items:center;flex:0 0 auto;width:60px;height:60px;border-radius:18px;background:linear-gradient(145deg,#f7f1da,#c6e5d4 35%,#2c7a63 100%);box-shadow:inset 0 1px 8px rgba(255,255,255,.55),0 14px 32px rgba(29,107,87,.18);font-family:var(--font-display);font-weight:700;font-size:1.35rem;line-height:1;color:#143b31;letter-spacing:-.08em}
     .brand strong,.brand span{display:block}
-    .brand strong{font-size:1.1rem}
-    .brand span{color:var(--muted);font-size:.88rem}
-    .topnav{display:flex;gap:1rem}
-    .topnav a,.logout-btn{padding:.65rem 1rem;border-radius:999px;text-decoration:none;color:var(--muted);transition:.2s ease;background:transparent;border:0;font:inherit;cursor:pointer}
-    .topnav a.active,.topnav a:hover{background:rgba(31,138,112,.12);color:var(--foreground)}
-    .logout-btn:hover{background:rgba(31,138,112,.12);color:var(--foreground)}
-    @media (max-width:760px){.topbar{padding:1rem;flex-direction:column;align-items:flex-start;gap:1rem}.topnav{width:100%;overflow:auto}}
+    .brand strong{font-size:1rem;line-height:1.15}
+    .brand span{color:var(--muted);font-size:.84rem}
+    .topnav{display:flex;align-items:center;justify-content:flex-end;gap:.55rem;flex-wrap:wrap}
+    .topnav a,.logout-btn{padding:.7rem 1rem;border-radius:999px;text-decoration:none;color:var(--muted);transition:background .2s ease,color .2s ease,transform .2s ease;background:transparent;border:1px solid transparent;cursor:pointer}
+    .topnav a.active,.topnav a:hover,.logout-btn:hover{background:rgba(29,107,87,.1);border-color:rgba(29,107,87,.14);color:var(--foreground);transform:translateY(-1px)}
+    @media (max-width:860px){
+      .topbar{padding:1rem;align-items:flex-start;flex-direction:column}
+      .topbar::before{inset:.35rem .6rem}
+      .topnav{width:100%;justify-content:flex-start}
+    }
+    @media (max-width:520px){
+      .brand{align-items:flex-start}
+      .brand-mark{width:52px;height:52px}
+      .topnav a,.logout-btn{flex:1 1 calc(50% - .55rem);text-align:center}
+    }
   `]
 })
 export class HeaderComponent {

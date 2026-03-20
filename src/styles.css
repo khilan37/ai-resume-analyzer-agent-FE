@@ -1,36 +1,92 @@
 :root{
-  --background:#f5fbf7;
-  --background-accent:#e4f3ea;
+  --background:#f3f6ef;
+  --background-deep:#dcead9;
   --surface:#ffffff;
-  --foreground:#082032;
-  --muted:#5b6b73;
-  --primary:#1f8a70;
-  --primary-soft:#b7e4c7;
+  --surface-strong:rgba(255,255,255,.82);
+  --foreground:#10231c;
+  --muted:#597067;
+  --primary:#1d6b57;
+  --primary-strong:#0f4f43;
+  --primary-soft:#cfe6d7;
+  --accent:#f1b96b;
+  --danger:#b42318;
+  --border:rgba(16,35,28,.1);
+  --shadow-lg:0 32px 90px rgba(16,35,28,.14);
+  --shadow-md:0 18px 42px rgba(16,35,28,.1);
   --font-body:'Manrope',sans-serif;
   --font-display:'Space Grotesk',sans-serif;
 }
 
 *{box-sizing:border-box}
 html,body{height:100%}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:var(--font-body);
   color:var(--foreground);
   background:
-    radial-gradient(circle at top right, rgba(183,228,199,.9), transparent 30%),
-    radial-gradient(circle at left center, rgba(31,138,112,.08), transparent 28%),
-    linear-gradient(180deg,var(--background),#f9fcfa);
+    radial-gradient(circle at top left, rgba(241,185,107,.28), transparent 24%),
+    radial-gradient(circle at top right, rgba(115,167,141,.35), transparent 26%),
+    radial-gradient(circle at 20% 70%, rgba(29,107,87,.08), transparent 22%),
+    linear-gradient(180deg, #eef4ec 0%, var(--background) 36%, #f8fbf6 100%);
 }
 
-body::before{
+body::before,
+body::after{
   content:'';
   position:fixed;
   inset:0;
   pointer-events:none;
-  background-image:linear-gradient(rgba(8,32,50,.03) 1px, transparent 1px),linear-gradient(90deg, rgba(8,32,50,.03) 1px, transparent 1px);
-  background-size:32px 32px;
-  mask-image:radial-gradient(circle at center, black 35%, transparent 85%);
 }
 
+body::before{
+  background-image:
+    linear-gradient(rgba(16,35,28,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,35,28,.03) 1px, transparent 1px);
+  background-size:34px 34px;
+  mask-image:radial-gradient(circle at center, black 28%, transparent 82%);
+}
+
+body::after{
+  background:
+    radial-gradient(circle at 12% 16%, rgba(255,255,255,.88), transparent 18%),
+    radial-gradient(circle at 88% 20%, rgba(255,255,255,.6), transparent 14%);
+  opacity:.8;
+}
+
+a,button,input,textarea,select{font:inherit}
+a{color:inherit}
+
 .shell{position:relative;min-height:100%}
-.mat-mdc-card{box-shadow:none!important}
+.shell::before{
+  content:'';
+  position:absolute;
+  inset:0 0 auto;
+  height:420px;
+  background:
+    radial-gradient(circle at top center, rgba(255,255,255,.72), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.35), transparent);
+  pointer-events:none;
+}
+
+.mat-mdc-card{
+  box-shadow:none!important;
+  background:var(--surface-strong)!important;
+  backdrop-filter:blur(16px);
+}
+
+.mat-mdc-unelevated-button.mat-primary{
+  --mdc-filled-button-container-color:var(--primary);
+  --mdc-filled-button-label-text-color:#f7fff9;
+}
+
+.mat-mdc-outlined-button{
+  --mdc-outlined-button-outline-color:rgba(16,35,28,.16);
+}
+
+.mat-mdc-form-field-subscript-wrapper{display:none}
+
+@media (max-width:760px){
+  body::before{background-size:24px 24px}
+  .shell::before{height:320px}
+}
