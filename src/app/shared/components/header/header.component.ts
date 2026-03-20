@@ -10,9 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
   template: `
     <header class="topbar">
       <a routerLink="/" class="brand">
-        <span class="brand-mark" aria-hidden="true">
-          <span class="brand-mark-core">SR</span>
-        </span>
+        <span class="brand-mark" aria-hidden="true">SR</span>
         <div>
           <strong>Smart Resume Analyzer Agent</strong>
           <span>Angular + .NET + Gemini</span>
@@ -31,8 +29,7 @@ import { AuthService } from '../../../core/services/auth.service';
     .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 2rem;max-width:1240px;margin:0 auto}
     .topbar::before{content:'';position:absolute;inset:.4rem 1rem;border:1px solid rgba(16,35,28,.08);border-radius:28px;background:rgba(255,255,255,.62);backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(16,35,28,.08);z-index:-1}
     .brand{display:flex;gap:1rem;align-items:center;color:inherit;text-decoration:none;min-width:0}
-    .brand-mark{display:grid;place-items:center;flex:0 0 auto;width:60px;height:60px;border-radius:18px;background:linear-gradient(145deg,#1d6b57,#3f8f74);box-shadow:0 14px 30px rgba(29,107,87,.18);overflow:hidden}
-    .brand-mark-core{display:grid;place-items:center;width:100%;height:100%;font-family:var(--font-display);font-weight:700;font-size:1.08rem;line-height:1;color:#f7fff9;letter-spacing:-.08em;text-align:center}
+    .brand-mark{display:inline-block;flex:0 0 auto;font-family:var(--font-display);font-weight:700;font-size:1.2rem;line-height:1;color:var(--primary);letter-spacing:-.08em}
     .brand strong,.brand span{display:block}
     .brand strong{font-size:1rem;line-height:1.15}
     .brand span{color:var(--muted);font-size:.84rem}
@@ -46,8 +43,7 @@ import { AuthService } from '../../../core/services/auth.service';
     }
     @media (max-width:520px){
       .brand{align-items:flex-start}
-      .brand-mark{width:52px;height:52px}
-      .brand-mark-core{font-size:.96rem}
+      .brand-mark{font-size:1.06rem}
       .topnav a,.logout-btn{flex:1 1 calc(50% - .55rem);text-align:center}
     }
   `]
