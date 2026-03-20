@@ -29,7 +29,7 @@ import { AuthService } from '../../../core/services/auth.service';
     .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 2rem;max-width:1240px;margin:0 auto}
     .topbar::before{content:'';position:absolute;inset:.4rem 1rem;border:1px solid rgba(16,35,28,.08);border-radius:28px;background:rgba(255,255,255,.62);backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(16,35,28,.08);z-index:-1}
     .brand{display:flex;gap:1rem;align-items:center;color:inherit;text-decoration:none;min-width:0}
-    .brand-mark{display:grid;place-items:center;flex:0 0 auto;width:60px;height:60px;border-radius:18px;background:linear-gradient(145deg,#f7f1da,#c6e5d4 35%,#2c7a63 100%);box-shadow:inset 0 1px 8px rgba(255,255,255,.55),0 14px 32px rgba(29,107,87,.18);font-family:var(--font-display);font-weight:700;font-size:1.35rem;line-height:1;color:#143b31;letter-spacing:-.08em}
+    .brand-mark{display:grid;place-items:center;flex:0 0 auto;width:60px;height:60px;border-radius:18px;background:linear-gradient(145deg,#f7f1da,#c6e5d4 35%,#2c7a63 100%);box-shadow:inset 0 1px 8px rgba(255,255,255,.55),0 14px 32px rgba(29,107,87,.18);font-family:var(--font-display);font-weight:700;font-size:1.28rem;line-height:1;color:#143b31;letter-spacing:-.06em;text-align:center;overflow:hidden}
     .brand strong,.brand span{display:block}
     .brand strong{font-size:1rem;line-height:1.15}
     .brand span{color:var(--muted);font-size:.84rem}
@@ -43,7 +43,7 @@ import { AuthService } from '../../../core/services/auth.service';
     }
     @media (max-width:520px){
       .brand{align-items:flex-start}
-      .brand-mark{width:52px;height:52px}
+      .brand-mark{width:52px;height:52px;font-size:1.12rem}
       .topnav a,.logout-btn{flex:1 1 calc(50% - .55rem);text-align:center}
     }
   `]
