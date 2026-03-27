@@ -13,7 +13,6 @@ import { AuthService } from '../../../core/services/auth.service';
         <span class="brand-mark" aria-hidden="true">SR</span>
         <div>
           <strong>Smart Resume Analyzer Agent</strong>
-          <span>Angular + .NET + Gemini</span>
         </div>
       </a>
 
